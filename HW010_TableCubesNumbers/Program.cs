@@ -13,8 +13,7 @@
 // 2. Метод возведения числа в степень
 // 3. Метод получения списка чисел (от 1 до max), возведенных в степень
 
-Console.Clear();
-
+#region Methods
 // Метод ввода числа с консоли
 int EnterIntNumberConsole()
 {
@@ -46,7 +45,9 @@ void TableDegrees(int number, int power)
         currentNum++;
     }
 }
+#endregion
 
+Console.Clear();
 Console.WriteLine("Данная программа выдает список кубов чисел от 1 до N включительно, ");
 Console.WriteLine("где N - натуральное число");
 Console.Write("Введите N: ");
