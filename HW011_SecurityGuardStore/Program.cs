@@ -14,6 +14,16 @@
 // Ответ
 // 11-12
 
+// Алгоритм
+// 1. Зададим массив, в который будем добавлять часы нахождения 
+// в магазине покупателей. Рассматриваем целые сутки от 0 до 24
+// 2. Заполним массив, передав в него данные входа 
+// и выхода покупателей. Час, в который покупатель выходит, 
+// учитывать не будем, т.к. весь этот час он внутри не будет 
+// 3. Найдем максимальное значение в заполненном массиве
+// 4. Найдем позиции пиковых значений в заполненном массиве
+// 5. Выведем на экран промежуток(ки) времени, в который
+// было больше всего посетителей
 
 #region Methods unfit
 
@@ -50,7 +60,7 @@ int[] LogBuyer(int[] array, int count)
 #endregion
 
 #region Methods
-    
+
 // 1. Метод получения псевдослучайного числа от min до max
 int GetIntValue(int min, int max)
 {
@@ -63,17 +73,17 @@ int[] CreateArray(int size)
     return new int[size];
 }
 
-// 3. Метод добавления входа и выхода покупателя
+// 3. Метод добавления входа и выхода покупателя в течение суток (0-24)
 void FillBuyer(int[] array, int min, int max)
 {
-    if (min > max)
+    if (min > max) // на случай задания min и max рандомом или в обратном порядке
     {
         int help = min;
         min = max;
         max = help;
     }
     int i = min;
-    while (i <= max)
+    while (i < max)
     {
         array[i] = array[i] + 1;
         i++;
@@ -94,7 +104,7 @@ void Print(int[] array)
 }
 
 // 5. Метод поиска максимального элемента в массиве
-int MaximumValue(int[] arr)
+int FindMaximumValue(int[] arr)
 {
     int leng = arr.Length;
     int max = arr[0];
@@ -105,32 +115,70 @@ int MaximumValue(int[] arr)
     return max;
 }
 
-// 6. Метод поиска позиций одинаковых элементов в массиве
+// 6. Метод нахождения количества одинаковых элементов в массиве
+int FindAmountSameItem(int[] array, int item)
+{
+    int length = array.Length;
+    int amount = 0;
+    for (int index = 0; index < length; index++)
+    {
+        if (array[index] == item) amount = amount + 1;
+    }
+    return amount;
+}
 
+// 7. Метод поиска позиций одинаковых элементов в массиве
+int[] FindIndexSameItem(int[] array, int item, int countItem)
+{
+    int[] arrayIndex = new int[countItem];
+    int size = array.Length;
+    int pos = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (array[i] == item)
+        {
+            arrayIndex[pos] = i;
+            pos++;
+        }
+    }
+    return arrayIndex;
+}
+
+// Метод вывода ответа
 
 
 
 #endregion
 
 Console.Clear();
-int[] arr = { 10, 10, 20, 30, 40, 50, 60, 70, 80, 90, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
-Print(arr);
 int[] arrayDay = CreateArray(24);
 // Print(arrayDay);
 // int count = GetIntValue(1, 101);
+Console.WriteLine("Введите количество покупателей");
 int count = EnterIntNumber();
 Console.WriteLine($"Количество покупателей за день: {count}");
+int[] arr = { 10, 10, 20, 30, 40, 50, 60, 70, 80, 90, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+Print(arr); // для удобного ориентирования по часам
 for (int buyer = 0; buyer < count; buyer++)
 {
-    FillBuyer(arrayDay, GetIntValue(0, 24), GetIntValue(0, 24));
-    // FillBuyer(arrayDay, EnterIntNumber(), EnterIntNumber());
+    FillBuyer(arrayDay, GetIntValue(0, 25), GetIntValue(0, 25)); // рандомный вход и выход
+    // int minB = GetIntValue(0, 25); 
+    // int maxB = GetIntValue(0, 25);
+    // Console.WriteLine($"{minB} - {maxB}"); 
+    // FillBuyer(arrayDay, minB, maxB); // покажет рандомные данные входа и выхода
+    // FillBuyer(arrayDay, EnterIntNumber(), EnterIntNumber()); // ввести вход и выход с консоли
 }
 Print(arrayDay);
-int max = MaximumValue(arrayDay);
-Console.WriteLine(max);
-
-
-// Log(arrayDay, 100);
-// Print(arrayDay);
-
-
+int max = FindMaximumValue(arrayDay);
+Console.WriteLine($"Max = {max}");
+int countMax = FindAmountSameItem(arrayDay, max);
+Console.WriteLine($"Количество пиковых часов: {countMax}");
+int[] maxHours = FindIndexSameItem(arrayDay, max, countMax);
+Console.Write($"Максимальные часы: ");
+Print(maxHours);
+Console.WriteLine("Максимальное количество покупателей было в следующие промежутки: ");
+int answer = maxHours.Length;
+for (int j = 0; j < answer; j++)
+{
+    Console.WriteLine($"{maxHours[j]} - {maxHours[j] + 1} ч");
+}
