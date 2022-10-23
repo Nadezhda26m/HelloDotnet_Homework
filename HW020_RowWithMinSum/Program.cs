@@ -80,7 +80,7 @@ void PrintMatrix(string matrix)
     Console.Write(matrix[0]);
     for (int i = 1; i < matrix.Length; i++)
     {
-        if (matrix[i].ToString() == "{")
+        if (matrix[i] == '{')
         {
             Console.Write("\n{");
         }
