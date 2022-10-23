@@ -1,7 +1,4 @@
-﻿// Seminars
-// Example012_MatrixProduct
-
-// Задача 58: Задайте две матрицы. Напишите программу, 
+﻿// Задача 58: Задайте две матрицы. Напишите программу, 
 // которая будет находить произведение двух матриц.
 // Например, даны 2 матрицы:
 // 2 4 | 3 4
@@ -44,8 +41,10 @@ int[,] CreateMatrix(int row, int col)
 // 3. Метод для заполнения матрицы
 void FillMatrix(int[,] matr, int min, int max)
 {
-    for (int i = 0; i < matr.GetLength(0); i++)
-        for (int j = 0; j < matr.GetLength(1); j++)
+    int row = matr.GetLength(0);
+    int col = matr.GetLength(1);
+    for (int i = 0; i < row; i++)
+        for (int j = 0; j < col; j++)
         {
             matr[i, j] = new Random().Next(min, max + 1);
         }
@@ -56,15 +55,13 @@ void PrintMatrix(int[,] matr)
 {
     int row = matr.GetLength(0);
     int col = matr.GetLength(1);
-    if (row != 0)           // ??? 
-        for (int i = 0; i < row; i++)
-        {
-            Console.Write("{ ");
-            for (int j = 0; j < col; j++)
-                Console.Write(matr[i, j] + " ");
-            Console.WriteLine("}");
-        }
-    else Console.WriteLine("{ }");          // ??? 
+    for (int i = 0; i < row; i++)
+    {
+        Console.Write("{ ");
+        for (int j = 0; j < col; j++)
+            Console.Write(matr[i, j] + " ");
+        Console.WriteLine("}");
+    }
 }
 
 // 5. Метод для проверки возможности умножения двух матриц
@@ -86,10 +83,10 @@ int[,] Multiply(int[,] matrA, int[,] matrB)
     for (int i = 0; i < rowAB; i++)
         for (int j = 0; j < colAB; j++)
             for (int k = 0; k < commonSide; k++)
-                matrAB[i, j] = matrAB[i, j] + matrA[i, k] * matrB[k, j];
+                matrAB[i, j] += matrA[i, k] * matrB[k, j];
     return matrAB;
 }
-#endregion // Методы
+#endregion Методы
 
 Console.Clear();
 #region Задание исходных матриц, способ 1
@@ -105,7 +102,7 @@ Console.Clear();
 // FillMatrix(matrix2, 1, 5);
 // Console.WriteLine("Матрица B");
 // PrintMatrix(matrix2);
-#endregion
+#endregion Задание исходных матриц, способ 1
 
 #region Задание исходных матриц, способ 2
 int[,] matrix1 = CreateMatrix(GetIntValue(2, 4), GetIntValue(2, 4));
@@ -117,7 +114,7 @@ int[,] matrix2 = CreateMatrix(GetIntValue(2, 4), GetIntValue(2, 4));
 FillMatrix(matrix2, 1, 5);
 Console.WriteLine("Матрица B");
 PrintMatrix(matrix2);
-#endregion
+#endregion Задание исходных матриц, способ 2
 
 bool chance = CheckPossibilityProduct(matrix1, matrix2);
 if (chance)
