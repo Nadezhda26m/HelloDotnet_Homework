@@ -41,61 +41,54 @@ int[,] matrix = CreateMatrix(4, 4);
 int num = 1;
 int row = matrix.GetLength(0);
 int col = matrix.GetLength(1);
-for (int i = 0; i < 1; i++) // вправо
+// вправо
+int rowNow = 0;
+for (int j = 0; j < col; j++)
 {
-    for (int j = 0; j < col; j++)
-    {
-        matrix[i, j] = num;
-        num++;
-    }
+    matrix[rowNow, j] = num;
+    num++;
 }
-for (int i = 1; i < row; i++) // вниз
+// вниз
+int colNow = 3;
+for (int i = 1; i < row; i++)
 {
-    for (int j = col - 1; j < col; j++)
-    {
-        matrix[i, j] = num;
-        num++;
-    }
+    matrix[i, colNow] = num;
+    num++;
 }
-for (int i = row - 1; i < row; i++) // влево
+// влево
+rowNow = 3;
+for (int j = col - 2; j > -1; j--)
 {
-    for (int j = col - 2; j > -1; j--)
-    {
-        matrix[i, j] = num;
-        num++;
-    }
+    matrix[rowNow, j] = num;
+    num++;
 }
-for (int i = row - 2; i > 0; i--) // вверх
+// вверх
+colNow = 0;
+for (int i = row - 2; i > 0; i--)
 {
-    for (int j = 0; j < 1; j++)
-    {
-        matrix[i, j] = num;
-        num++;
-    }
+    matrix[i, colNow] = num;
+    num++;
 }
-for (int i = 1; i < 2; i++) // вправо
+// вправо
+rowNow = 1;
+for (int j = 1; j < col - 1; j++)
 {
-    for (int j = 1; j < col - 1; j++)
-    {
-        matrix[i, j] = num;
-        num++;
-    }
+    matrix[rowNow, j] = num;
+    num++;
 }
-for (int i = 2; i < row - 1; i++) // вниз
+// вниз
+colNow = 2;
+for (int i = 2; i < row - 1; i++)
 {
-    for (int j = col - 2; j < col - 1; j++)
-    {
-        matrix[i, j] = num;
-        num++;
-    }
+    matrix[i, colNow] = num;
+    num++;
 }
-for (int i = row - 2; i < row - 1; i++) // влево
+// влево
+rowNow = 2;
+for (int j = col - 3; j > 0; j--)
 {
-    for (int j = col - 3; j > 0; j--)
-    {
-        matrix[i, j] = num;
-        num++;
-    }
+    matrix[rowNow, j] = num;
+    num++;
 }
 
 PrintMatrix(matrix);
