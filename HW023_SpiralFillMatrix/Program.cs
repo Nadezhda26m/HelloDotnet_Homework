@@ -35,43 +35,43 @@ void Method(int[,] matr, int row, int col, int num, int i, int j, int flag)
                 j++;
                 count++;
             }
-            Method(matr, row - 1, col, num, i, j, flag + 1);
+            Method(matr, row - 1, col, num, i + 1, j - 1, flag + 1);
         }
         if (flag == 2)
         {
             count = 0;
             while (count < row) // вниз
             {
-                matr[i + 1, j - 1] = num;
+                matr[i, j] = num;
                 num++;
                 i++;
                 count++;
             }
-            Method(matr, row, col - 1, num, i, j, flag + 1);
+            Method(matr, row, col - 1, num, i - 1, j - 1, flag + 1);
         }
         if (flag == 3)
         {
             count = 0;
             while (count < row) // влево
             {
-                matr[i, j - 2] = num;
+                matr[i, j] = num;
                 num++;
                 j--;
                 count++;
             }
-            Method(matr, row - 1, col, num, i, j, flag + 1);
+            Method(matr, row - 1, col, num, i - 1, j + 1, flag + 1);
         }
         if (flag == 4)
         {
             count = 0;
             while (count < row) // вверх
             {
-                matr[i - 1, j - 1] = num;
+                matr[i, j] = num;
                 num++;
                 i--;
                 count++;
             }
-            Method(matr, row, col - 1, num, i, j, flag - 3);
+            Method(matr, row, col - 1, num, i + 1, j + 1, flag - 3);
         }
     }
 }
