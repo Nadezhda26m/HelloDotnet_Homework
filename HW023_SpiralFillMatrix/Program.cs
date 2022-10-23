@@ -43,49 +43,49 @@ int row = matrix.GetLength(0);
 int col = matrix.GetLength(1);
 // вправо
 int rowNow = 0;
-for (int j = 0; j < col; j++)
+for (int j = 0; j < 4; j++)
 {
     matrix[rowNow, j] = num;
     num++;
 }
 // вниз
 int colNow = 3;
-for (int i = 1; i < row; i++)
+for (int i = 1; i < 4; i++)
 {
     matrix[i, colNow] = num;
     num++;
 }
 // влево
 rowNow = 3;
-for (int j = col - 2; j > -1; j--)
+for (int j = 2; j > -1; j--)
 {
     matrix[rowNow, j] = num;
     num++;
 }
 // вверх
 colNow = 0;
-for (int i = row - 2; i > 0; i--)
+for (int i = 2; i > 0; i--)
 {
     matrix[i, colNow] = num;
     num++;
 }
 // вправо
 rowNow = 1;
-for (int j = 1; j < col - 1; j++)
+for (int j = 1; j < 3; j++)
 {
     matrix[rowNow, j] = num;
     num++;
 }
 // вниз
 colNow = 2;
-for (int i = 2; i < row - 1; i++)
+for (int i = 2; i < 3; i++)
 {
     matrix[i, colNow] = num;
     num++;
 }
 // влево
 rowNow = 2;
-for (int j = col - 3; j > 0; j--)
+for (int j = 1; j > 0; j--)
 {
     matrix[rowNow, j] = num;
     num++;
