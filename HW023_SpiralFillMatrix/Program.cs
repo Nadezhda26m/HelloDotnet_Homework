@@ -19,10 +19,10 @@ int[,] CreateMatrix(int row, int col)
     return new int[row, col];
 }
 
-// Метод спирального заполнения двумерного массива по часовой стрелке
-// с равным количеством строк и столбцов от элемента на позиции [0, 0]
-// с начальным флагом 1
-void Method(int[,] matr, int row, int col, int num, int i, int j, int flag)
+// Метод спирального заполнения двумерного массива 
+// по часовой стрелке с равным количеством строк и столбцов 
+// от элемента на позиции [0, 0] с начальным флагом 1
+void Method1(int[,] matr, int row, int num, int i, int j, int flag)
 {
     if (row > 0)
     {
@@ -39,13 +39,56 @@ void Method(int[,] matr, int row, int col, int num, int i, int j, int flag)
             if (flag == 4) i--; // вверх
         }
         if (flag == 1)
-            Method(matr, row - 1, col, num, i + 1, j - 1, flag + 1);
+            Method1(matr, row - 1, num, i + 1, j - 1, flag + 1);
         if (flag == 2)
-            Method(matr, row, col - 1, num, i - 1, j - 1, flag + 1);
+            Method1(matr, row, num, i - 1, j - 1, flag + 1);
         if (flag == 3)
-            Method(matr, row - 1, col, num, i - 1, j + 1, flag + 1);
+            Method1(matr, row - 1, num, i - 1, j + 1, flag + 1);
         if (flag == 4)
-            Method(matr, row, col - 1, num, i + 1, j + 1, flag + 1);
+            Method1(matr, row, num, i + 1, j + 1, flag + 1);
+    }
+}
+
+
+// Метод спирального заполнения двумерного массива 
+// по часовой стрелке с разным количеством строк и столбцов 
+// от элемента на позиции [0, 0] с начальным флагом 1
+void Method2(int[,] matr, int row, int col, int num, int i, int j, int flag)
+{
+    if (row != 0 && col != 0)
+    {
+        int count = 0;
+        if (flag == 5) flag = 1;
+        if (flag % 2 == 0)
+        {
+            while (count < row)
+            {
+                matr[i, j] = num;
+                num++;
+                count++;
+                if (flag == 2) i++; // вниз
+                if (flag == 4) i--; // вверх
+            }
+        }
+        else
+        {
+            while (count < col)
+            {
+                matr[i, j] = num;
+                num++;
+                count++;
+                if (flag == 1) j++; // вправо
+                if (flag == 3) j--; // влево
+            }
+        }
+        if (flag == 1)
+            Method2(matr, row - 1, col, num, i + 1, j - 1, flag + 1);
+        if (flag == 2)
+            Method2(matr, row, col - 1, num, i - 1, j - 1, flag + 1);
+        if (flag == 3)
+            Method2(matr, row - 1, col, num, i - 1, j + 1, flag + 1);
+        if (flag == 4)
+            Method2(matr, row, col - 1, num, i + 1, j + 1, flag + 1);
     }
 }
 
@@ -64,10 +107,16 @@ void PrintMatrix(int[,] matr)
 }
 
 Console.Clear();
-
-int[,] matrix4 = CreateMatrix(6, 6);
-int row4 = matrix4.GetLength(0);
-int col4 = matrix4.GetLength(1);
-int numberStart = 10;
-Method(matrix4, row4, col4, numberStart, 0, 0, 1);
+int row4 = 4;
+int[,] matrix4 = CreateMatrix(row4, row4);
+int numberStart = 11;
+Method1(matrix4, row4, numberStart, 0, 0, 1);
 PrintMatrix(matrix4);
+Console.WriteLine();
+
+int[,] matrix5 = CreateMatrix(4, 7);
+int row5 = matrix5.GetLength(0);
+int col5 = matrix5.GetLength(1);
+int numberStart2 = 11;
+Method2(matrix5, row5, col5, numberStart2, 0, 0, 1);
+PrintMatrix(matrix5);
